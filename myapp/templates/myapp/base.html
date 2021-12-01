@@ -1,0 +1,27 @@
+{% load static %}
+<html>
+<head>
+	<title>Welcome</title>
+	<link rel="stylesheet" type="text/css" href="{%static 'bootstrap/css/bootstrap.min.css'%}">
+	<link rel="stylesheet" type="text/css" href="{%static 'style.css'%}">
+</head>
+<body>
+	{% include 'myapp/navbar.html'%}
+	<div class="main-content">
+	{%if messages%}
+	{% for message in messages%}
+	<div class="alert alert-{{ message.tags }}">
+		{{ message }}
+	</div>
+	{% endfor %}
+	{%endif%}
+	{%block content%}
+	{%endblock content%}
+	</div>
+	<!-------------------------------------scripts--------------------------------->
+	<script type="text/javascript" src="{%static 'js/jquery.min.js'%}"></script>
+	<script type="text/javascript" src="{%static 'bootstrap/js/bootstrap.min.js'%}"></script>
+	<script type="text/javascript" src="{%static 'js/style.js'%}"></script>
+	<!----------------------------------------scripts-------------------------------->
+</body>
+</html>

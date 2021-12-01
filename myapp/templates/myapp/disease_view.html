@@ -1,0 +1,24 @@
+{%extends 'myapp/base.html'%}
+{%block content%}
+    <div class="container">
+         <div class="col-sm-6 mt-3">
+         <div class="card">
+            <div class="card-title ml-2">
+                {{object.author}}
+                <small class="text-muted">{{object.status}}</small>
+                {% if object.author == user%}
+                <div>
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="#">Update</a>
+                     <a class="btn btn-danger btn-sm mt-1 mb-1" href="#">Delete</a>
+                </div>
+                {% endif%}
+            </div>
+             <hr>
+            <div class="card-body">
+                 <h2>{{object.DiseaseName}}</h2>
+                 <p > {{object.DiseaseDescription}}</p>
+            </div>
+         </div>
+         </div>
+    </div>
+{%endblock content%}
