@@ -1,17 +1,16 @@
 {%extends 'myapp/base.html'%}
 {%block content%}
-{% for Post in posts%}
+{% for Disease in diseases%}
 <div class="container">
 	 <div class="col-sm-6 mt-3">
  	 <div class="card">
 		<div class="card-title ml-2">
-			{{Post.author}}
-			<small class="text-muted">{{Post.date_posted|date:"F d,Y"}}</small>
+			{Disease.author}
 		</div>
 		 <hr>
 		<div class="card-body">
-			<h2><a href="{%url 'Post_detail' Post.id%}">{{Post.title}}</a></h2>
-			<p > {{Post.content}}</p>
+			<h2><a href="{%url 'disease_detail' disease.id%}">{{Disease.DiseaseName}}</a></h2>
+			<p > {{Disease.DiseaseDescription}}</p>
 		</div>
 	 </div>
      </div>
