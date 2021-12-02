@@ -8,15 +8,16 @@
                 <small class="text-muted">{{object.date_posted|date:"F d,Y"}}</small>
                 {% if object.author == user%}
                 <div>
-                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'Post-update' object.id%}">Update</a>
-                     <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'Post_delete' object.id%}">Delete</a>
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'herb_update' object.id%}">Update</a>
+                     <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'Disease_delete' object.id%}">Delete</a>
                 </div>
                 {% endif%}
             </div>
              <hr>
             <div class="card-body">
-                 <h2>{{object.title}}</h2>
-                 <p > {{object.content}}</p>
+                <p > {{object.HerbName}}</p>
+                 <p>{{object.HerbPhoto}}</p>
+                 <p > {{object.DiseaseName}}</p>
             </div>
          </div>
          </div>

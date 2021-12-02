@@ -52,19 +52,21 @@ class Disease(models.Model):
     DiseaseDescription = models.TextField()
     status = models.ForeignKey(DiseaseStatus, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    date_posted = models.DateTimeField(default=timezone.now)
     DiseasePhoto = models.ImageField(default="default.jpeg", upload_to='diseasePhotos')
 
     def __str__(self):
         return self.DiseaseName
 
     def get_absolute_url(self):
-        return reverse('disease_detail', kwargs={'pk': self.pk})
+        return reverse('Disease_detail', kwargs={'pk': self.pk})
 
 
 class Herb(models.Model):
     HerbId = models.AutoField(primary_key=True)
     HerbName = models.CharField(max_length=40)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    date_posted = models.DateTimeField(default=timezone.now)
     HerbPhoto = models.ImageField(default="default.jpeg", upload_to='HerbPhotos')
     diseaseName = models.ForeignKey(Disease, on_delete=models.CASCADE)
 

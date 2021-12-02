@@ -5,11 +5,11 @@
          <div class="card">
             <div class="card-title ml-2">
                 {{object.author}}
-                <small class="text-muted">{{object.status}}</small>
+                <small class="text-muted">{{object.date_posted|date:"F d,Y"}}</small>
                 {% if object.author == user%}
                 <div>
-                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="#">Update</a>
-                     <a class="btn btn-danger btn-sm mt-1 mb-1" href="#">Delete</a>
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'Disease-update' object.id%}">Update</a>
+                     <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'Disease_delete' object.id%}">Delete</a>
                 </div>
                 {% endif%}
             </div>
@@ -21,4 +21,4 @@
          </div>
          </div>
     </div>
-{%endblock content%}
+{% endblock content%}

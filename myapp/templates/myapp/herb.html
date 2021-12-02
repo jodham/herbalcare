@@ -1,0 +1,20 @@
+{%extends 'myapp/base.html'%}
+{%block content%}
+{% for Herb in herbs%}
+		<div class="container">
+			 <div class="col-sm-6 mt-3">
+			 <div class="card">
+				<div class="card-title ml-2">
+					{{Herb.author}}
+				</div>
+				 <hr>
+				<div class="card-body">
+					<h2><a href="{% url 'herb_detail' object.id%}">{{Herb.HerbName}}</a></h2>
+					<a href="#">{{Herb.HerbPhoto}}</a>
+					<p > {{Herb.diseaseName}}</p>
+				</div>
+			 </div>
+		</div>
+		</div>
+{%endfor%}
+{% endblock content%}

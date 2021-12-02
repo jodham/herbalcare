@@ -36,6 +36,7 @@ class DiseaseCreateView(LoginRequiredMixin, CreateView):
 class HerbCreateView(LoginRequiredMixin, CreateView):
     model = Herb
     fields = ['HerbName', 'diseaseName', 'HerbPhoto']
+    success_url = reverse_lazy('herb_detail')
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -53,12 +54,19 @@ class PostListView(ListView):
 
 class DiseaseListView(ListView):
     model = Disease
-    template_name = 'myapp/diseaseList.html'
+    template_name = 'myapp/diseases.html'
     context_object_name = 'diseases'
     ordering = ['-date_posted']
 
+
+class HerbListView(ListView):
+    model = Herb
+    template_name = 'myapp/herb.html'
+    context_object_name = 'herbs'
+    ordering = ['-date_posted']
 # -------------------------end---------------ListViews-------------------end-----------------#
 # -------------------------start---------------DetailView-------------------start-----------------#
+
 
 class PostDetailView(DetailView):
     model = Post
@@ -66,9 +74,15 @@ class PostDetailView(DetailView):
 
 
 class DiseaseDetailView(DetailView):
-    model = Post
-    template_name = 'myapp/disease_view.html'
+    model = Disease
+    template_name = 'myapp/disease_detail.html'
+
+
+class HerbDetailView(DetailView):
+    model = Herb
+    template_name = 'myapp/herb_detail.html'
 # -------------------------end---------------DetailView-------------------end-----------------#
+# -------------------------start---------------UpdateView-------------------start-----------------#
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -86,6 +100,38 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return False
 
 
+class DiseaseUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Disease
+    fields = ['DiseaseName', 'DiseaseDescription', 'status', 'DiseasePhoto']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        mypost = self.get_object()
+        if self.request.user == mypost.author:
+            return True
+        return False
+
+
+class HerbUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Herb
+    fields = ['HerbName', 'diseaseName', 'HerbPhoto']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        mypost = self.get_object()
+        if self.request.user == mypost.author:
+            return True
+        return False
+# -------------------------end---------------UpdateView-------------------end-----------------#
+# -------------------------start---------------DeleteView-------------------start-----------------#
+
+
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('home')
@@ -95,6 +141,18 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == mypost.author:
             return True
         return False
+
+
+class DiseaseDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Disease
+    success_url = reverse_lazy('disease')
+
+    def test_func(self):
+        mypost = self.get_object()
+        if self.request.user == mypost.author:
+            return True
+        return False
+# -------------------------start---------------DeleteView-------------------start-----------------#
 
 
 @login_required
